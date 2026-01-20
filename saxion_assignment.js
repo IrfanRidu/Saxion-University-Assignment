@@ -4,6 +4,7 @@
 
 
 
+// Defining Boat class
 
 class Boat {
     constructor() {
@@ -14,10 +15,17 @@ class Boat {
 
         this.directions = ["NORTH", "EAST", "SOUTH", "WEST"];
     }
+      
+
+   // Set boundary of 5*5 area
 
     isWithinBounds(x, y) {
         return x >= 0 && x <= 4 && y >= 0 && y <= 4;
-    }
+    };
+
+    // Checking if the inputted direction and X and Y values are within the predefined area not. 
+    // If not do nothing otherwise replace the initial values with the new inputted values and direction.
+    // And set the departed value true.
 
     depart(x, y, direction) {
         if (!this.directions.includes(direction)) return;
@@ -27,8 +35,12 @@ class Boat {
             this.y = y;
             this.direction = direction;
             this.departed = true;
-        }
+        };
     }
+
+    // Checking if the boat is departed or not 
+    // If not, do nothing otherwise set the newX and newY values with previous x and y values.
+
 
     sail() {
         if (!this.departed) return;
@@ -49,63 +61,99 @@ class Boat {
             case "WEST":
                 newX -= 1;
                 break;
-        }
+        };
+
+           
+        //  Checking wether after adding and subtracting 1 the newX and newY values are within the predefined area or not. 
+        //  if not, do nothing otherwise set the initial x and y values with Changed newX and newY  values to move forward
+        // by 1 meter.
+    
 
         if (this.isWithinBounds(newX, newY)) {
             this.x = newX;
             this.y = newY;
-        }
+        };
     }
+
+
+
+    //    To rotate the boat by 90 degree left of the inputted direction
+    //    find out the index of inputted the direction from the initially defined
+    //    direction array in boat class. After finding the index add 3 with the index 
+    //    number and then divide the sum by 4 and take the remaining and set the remaining
+    //    as new direction to change the current position to 
+    //    90 degree left.
+
 
     port() {
         if (!this.departed) return;
 
-        let index = this.directions.indexOf(this.direction);
-        this.direction = this.directions[(index + 3) % 4];
-    }
+        let currentIndexForLeftRotate = this.directions.indexOf(this.direction);
+        this.direction = this.directions[(currentIndexForLeftRotate + 3) % 4];
+    };
+
+
+
+    // To rotate the boat by 90 degree right of the inputted direction
+    //find out the index of inputted the direction from the initially defined
+    // direction array in boat class. After finding the index add 1 with the index 
+    // number and then divide the sum by 4 and take the remaining and set the remaining
+    // as new direction to change the current position to 
+    // 90 degree left.
 
     starboard() {
         if (!this.departed) return;
 
-        let index = this.directions.indexOf(this.direction);
-        this.direction = this.directions[(index + 1) % 4];
-    }
+        let currentIndexForRightRotate = this.directions.indexOf(this.direction);
+        this.direction = this.directions[(currentIndexForRightRotate + 1) % 4];
+    };
+
+
+    
+    // Checking if the boat is departed or not if not 
+    // do nothing otherwise print the value of x,y,and direction
 
     status() {
         if (!this.departed) return;
         console.log(`${this.x},${this.y},${this.direction}`);
-    }
+    };
 }
 
-class Simulator {
-    constructor() {
-        this.boat = new Boat();
-    }
+// class Simulator {
+//     constructor() {
+//         this.boat = new Boat();
+//     }
 
-    execute(command) {
-        const parts = command.trim().split(" ");
+//     execute(command) {
+//         const parts = command.trim().split(" ");
 
-        if (parts[0] === "DEPART") {
-            const [x, y, direction] = parts[1].split(",");
-            this.boat.depart(parseInt(x), parseInt(y), direction);
-            return;
-        }
+//         if (parts[0] === "DEPART") {
+//             const [x, y, direction] = parts[1].split(",");
+//             this.boat.depart(parseInt(x), parseInt(y), direction);
+//             return;
+//         }
 
-        if (!this.boat.departed) return;
+//         if (!this.boat.departed) return;
 
-        switch (parts[0]) {
-            case "SAIL":
-                this.boat.sail();
-                break;
-            case "PORT":
-                this.boat.port();
-                break;
-            case "STARBOARD":
-                this.boat.starboard();
-                break;
-            case "STATUS":
-                this.boat.status();
-                break;
-        }
-    }
-}
+//         switch (parts[0]) {
+//             case "SAIL":
+//                 this.boat.sail();
+//                 break;
+//             case "PORT":
+//                 this.boat.port();
+//                 break;
+//             case "STARBOARD":
+//                 this.boat.starboard();
+//                 break;
+//             case "STATUS":
+//                 this.boat.status();
+//                 break;
+//         }
+//     }
+// }
+
+
+
+
+
+
