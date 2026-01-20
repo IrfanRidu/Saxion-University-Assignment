@@ -40,6 +40,7 @@ class Boat {
 
     // Checking if the boat is departed or not 
     // If not, do nothing otherwise set the newX and newY values with previous x and y values.
+    // and move forward by 1 meter according to the direction.
 
 
     sail() {
@@ -47,6 +48,8 @@ class Boat {
 
         let newX = this.x;
         let newY = this.y;
+
+
 
         switch (this.direction) {
             case "NORTH":
@@ -76,7 +79,8 @@ class Boat {
     }
 
 
-
+    // Checking if the boat is departed or not if not do nothing
+     
     //    To rotate the boat by 90 degree left of the inputted direction
     //    find out the index of inputted the direction from the initially defined
     //    direction array in boat class. After finding the index add 3 with the index 
@@ -93,7 +97,7 @@ class Boat {
     };
 
 
-
+    // Checking if the boat is departed or not if not do nothing
     // To rotate the boat by 90 degree right of the inputted direction
     //find out the index of inputted the direction from the initially defined
     // direction array in boat class. After finding the index add 1 with the index 
@@ -119,38 +123,47 @@ class Boat {
     };
 }
 
-// class Simulator {
-//     constructor() {
-//         this.boat = new Boat();
-//     }
+class Simulator {
+    constructor() {
+        this.boat = new Boat();
+    }
 
-//     execute(command) {
-//         const parts = command.trim().split(" ");
 
-//         if (parts[0] === "DEPART") {
-//             const [x, y, direction] = parts[1].split(",");
-//             this.boat.depart(parseInt(x), parseInt(y), direction);
-//             return;
-//         }
+    //  splitting the DEPART input from other inputs by using whitespace as the question's
+    //   examples are like (DEPART 0,0,SOUTH}. Then splitting the other inputs using ","
+    // And parsing the x and y value as an integer.
 
-//         if (!this.boat.departed) return;
+    execute(command) {
+        const inputs = command.trim().split(" ");
 
-//         switch (parts[0]) {
-//             case "SAIL":
-//                 this.boat.sail();
-//                 break;
-//             case "PORT":
-//                 this.boat.port();
-//                 break;
-//             case "STARBOARD":
-//                 this.boat.starboard();
-//                 break;
-//             case "STATUS":
-//                 this.boat.status();
-//                 break;
-//         }
-//     }
-// }
+        if (inputs[0] === "DEPART") {
+            const [x, y, direction] = inputs[1].split(",");
+            this.boat.depart(parseInt(x), parseInt(y), direction);
+            return;
+        }
+
+     // Checking if the boat is departed or not 
+    // If not, return otherwise call the sail(),port(),
+    //  starboard() and status() functions 
+
+        if (!this.boat.departed) return;
+
+        switch (inputs[0]) {
+            case "SAIL":
+                this.boat.sail();
+                break;
+            case "PORT":
+                this.boat.port();
+                break;
+            case "STARBOARD":
+                this.boat.starboard();
+                break;
+            case "STATUS":
+                this.boat.status();
+                break;
+        }
+    }
+}
 
 
 
