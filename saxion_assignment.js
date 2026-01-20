@@ -1,5 +1,5 @@
 
-// Saxion University Assignment by MD Irfan Hassan
+// Saxion University Assignment using javascript by MD Irfan Hassan 
 
 
 
@@ -163,7 +163,7 @@ class Simulator {
                 break;
         }
     }
-}
+};
 
 
 
